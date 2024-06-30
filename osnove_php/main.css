@@ -1,0 +1,18 @@
+*{
+    box-sizing: border-box;
+}
+
+main{
+    margin: 39px auto;
+    max-width: 700px;
+}
+
+form{
+    width: 30%;
+    float: left;
+}
+
+table{
+    width: 70%;
+    float: left;
+}

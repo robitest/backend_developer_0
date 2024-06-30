@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domaca zadaca</title>
+    <style>
+        th{
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Domača zadača</h2>
+    <form action="#" method="POST">
+        <table border="1">
+            <tr>
+                <th>
+                    <label for="name">Ime:</label>
+                </th>
+                <td>
+                    <input type="text" name="name" id="name">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="last_name">Prezime:</label>
+                </th>
+                <td>
+                    <input type="text" name="last_name" id="last_name">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="mail">Email:</label>
+                </th>
+                <td>
+                    <input type="mail" name="mail" id="mail">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="state">Država:</label>
+                </th>
+                <td>
+                    <select name="state" id="state">
+                        <option value="croatia">Hrvatska</option>
+                        <option value="england">Engleska</option>
+                        <option value="germany">Njemačka</option>
+                        <option value="italy">Italija</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="gender">Spol:</label>
+                </th>
+                <td>
+                    <input type="radio" name="gender" id="gender_male">Muški
+                    <input type="radio" name="gender" id="gender_female">Ženski
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="interest">Zanima me:</label>
+                </th>
+                <td>
+                    <input type="radio" name="interest" id="interest_swimming">Muški
+                    <input type="radio" name="interest" id="interest_hiking">Penjanje
+                    <input type="radio" name="interest" id="interest_prog">Programiranje
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" id="submit">Pošalji</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
