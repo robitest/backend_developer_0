@@ -1,45 +1,65 @@
 
 <?php
 
+// function dd(&var){
+
+// }
+
 $connection = mysqli_connect('localhost', 'algebra', 'algebra', 'videoteka');
 
 if($connection === false){
     die("Connection failed: ". mysqli_connect_error());
 }
 
-$sql = "SELECT
-    f.naslov AS naslov_filma,
-    f.godina AS godina_filma,
-    z.ime AS zanr,
-    COUNT(f.id) AS broj_posudbi
-FROM
-    filmovi f
-    JOIN zanrovi z ON f.zanr_id = z.id
-    JOIN kopija k ON k.film_id = f.id
-    JOIN posudba_kopija pk ON pk.kopija_id = k.id
-    JOIN posudba ps ON pk.posudba_id = ps.id
-WHERE ps.datum_posudbe > '2024-01-01'
-GROUP BY k.film_id
-ORDER BY broj_posudbi DESC
-LIMIT 3;";
 
-$result = mysqli_query($connection, $sql);
+function getPopularMovies(mysqli $connection): array
+{
+    $sql = "SELECT
+        f.naslov AS naslov_filma,
+        f.godina AS godina_filma,
+        z.ime AS zanr,
+        COUNT(f.id) AS broj_posudbi
+    FROM
+        filmovi f
+        JOIN zanrovi z ON f.zanr_id = z.id
+        JOIN kopija k ON k.film_id = f.id
+        JOIN posudba_kopija pk ON pk.kopija_id = k.id
+        JOIN posudba ps ON pk.posudba_id = ps.id
+    WHERE ps.datum_posudbe > '2024-01-01'
+    GROUP BY k.film_id
+    ORDER BY broj_posudbi DESC
+    LIMIT 3;";
 
-if (mysqli_num_rows($result) === 0) {
-    die("There are no results for this query in our datbase!");
+    $results = mysqli_query($connection, $sql);
+    return mysqli_fetch_all($results);
 }
 
-$popularMovies = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-$sqlZanrovi = "SELECT f.*, z.ime as zanr from filmovi f JOIN zanrovi z ON f.zanr_id = z.id;";
-$result = mysqli_query($connection, $sqlZanrovi);
+function getGenres(mysqli $connection): array
+{
+    $sql = "SELECT id FROM zanrovi ORDER BY id";
 
-if (mysqli_num_rows($result) === 0) {
-    die("There are no results for this query in our datbase!");
+    $results = mysqli_query($connection, $sql);
+    if(mysqli_num_rows($results) === 0){
+        die("Error");
+    }
+    return mysqli_fetch_all($results);
 }
-$filmoviPoZanrovima = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+
+
+
+
+$genres = getGenres($connection);
+
+$popularMovies = getPopularMovies($connection);
+
+
+
+
 mysqli_close($connection);
-var_dump($filmoviPoZanrovima); die();
+// var_dump($filmoviPoZanrovima); die();
 
 ?>
 
