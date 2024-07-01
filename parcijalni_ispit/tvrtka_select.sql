@@ -29,6 +29,6 @@ BEGIN
     ORDER BY e.id;
 END $$
 
-DELIMITER;
+DELIMITER ;
 
 CALL average_employee_salary();
