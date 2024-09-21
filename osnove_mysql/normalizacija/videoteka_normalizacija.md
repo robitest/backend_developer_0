@@ -1,5 +1,4 @@
 
-
 ### Nenormalizirana tablica
 
 | Id  | Naslov     | Zanr    | Godina | Tip  | Medij | Cijena | Zakasnina | Datum Posudbe         | Clan       | Clanski Broj |
