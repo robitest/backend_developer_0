@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Price extends Model
 {
     use HasFactory;
-    
-    protected $table = 'cjenik';
 
-    protected $fillable = ['tip-filma', 'cijena', 'zakasnina_po_danu'];
+    protected $table = 'prices';
+
+    protected $fillable = ['type', 'price', 'late_fee'];
+
+    public function movies(){
+        return $this->hasMany(Movie::class);
+    }
 }

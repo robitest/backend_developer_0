@@ -5,19 +5,21 @@
 
 @section('content')
     
-    <div class="title flex-between">
+<div class="title flex-between">
+    <div class="">
         <h1>Cjenik</h1>
-        <div class="action-buttons">
-            <a href="/prices/create" type="submit" class="btn btn-primary">Dodaj novi</a>
-        </div>
     </div>
+    <div class="action-buttons">
+        <a href="{{ route('prices.create') }}" type="submit" class="btn btn-primary">Dodaj novu cijenu</a>
+    </div>
+</div>
 
     <hr>
     
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>No</th>
+                <th>Br</th>
                 <th>Tip Filma</th>
                 <th>Cijena</th>
                 <th>Zakasnina po danu</th>
@@ -25,23 +27,21 @@
             </tr>
         </thead>
         <tbody>
-            <?php $count = 1?>
             @foreach($prices as $price)
                 <tr>
-                    <td><?= $count ?></td>
-                    <td><a href="/prices/show?id={{ $price->id }}">{{ $price->tip_filma }}</a></td>
-                    <td>{{ $price->cijena }}</td>
-                    <td>{{ $price->zakasnina_po_danu }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td><a href="{{ route('prices.show', $price->id) }}">{{ $price->type }}</a></td>
+                    <td>€ {{ $price->price }}</td>
+                    <td>€ {{ $price->late_fee }}</td>
                     <td>
-                        <a href="/prices/edit?id=<?= $price['id'] ?>" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Uredi Medij"><i class="bi bi-pencil"></i></a>
-                        <form action="/prices/destroy" method="POST" class="d-inline">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="id" value="{{ $price->id }}">
-                            <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Obrisi Medij"><i class="bi bi-trash"></i></button>
+                        <a href="{{ route('prices.edit', $price->id) }}" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Uredi Cijenu"><i class="bi bi-pencil"></i></a>
+                        <form action="{{ route('prices.destroy', $price->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Obrisi Cijenu"><i class="bi bi-trash"></i></button>
                         </form>
                     </td>
                 </tr>
-                <?php $count++ ?>
             @endforeach
         </tbody>
     </table>

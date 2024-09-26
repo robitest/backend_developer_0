@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Format extends Model
 {
     use HasFactory;
+
+    protected $table = 'formats';
+
+    protected $fillable = ['type', 'coefficient'];
+
+    public function copies(){
+        return $this->hasMany(Copy::class);
+    }
 }

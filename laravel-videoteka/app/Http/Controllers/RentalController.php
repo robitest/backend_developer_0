@@ -13,7 +13,8 @@ class RentalController extends Controller
      */
     public function index()
     {
-        //
+        $rental = Rental::all();
+        return view('admin.rentals.index', ['rentals' => $rental]);
     }
 
     /**
